@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapi	s.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 5px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 10%;
+  border-radius: 10%;
+}
+
+.container {
+  padding: 1px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+	 <div id="welcome">
+        <p><span></span></p>
+     </div>
+      <div id="nextimage" class="imgcontainer">
+        <p><span></span></p>
+     </div>
+     <div id="username">
+        <p><span></span></p>
+     </div>
+	<div id="chatweb">
+        <p><span></span></p>
+     </div>
+
+
+
+
+
+
+  <div id="wecareimage" class="imgcontainer">
+    <img src="https://www.brandcrowd.com/gallery/brands/pictures/picture15611992633036.jpg" alt="Avatar"  width="300" height="200">
+  </div>
+
+
+
+  <div id="userInput" class="container">
+	 <h2>Login Form</h2>
+    <label for="uname"><b>Username</b></label>
+    <input id="textInput" type="text" name="msg" placeholder="Message" required>
+    
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+        
+    <input id="buttonInput" type="submit" value="Login">
+  </div>
+
+
+
+  <div id="clearme1" class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>
+
+
+
+
+<script>
+	function chatsetup(){
+		var rawText = $("#textInput").val();
+		$.get("/chatsetup", { custname : rawText}).done(function(){
+			$("#userInput").html("");
+			
+			$("#wecareimage").html("");
+			
+			$("#clearme1").html("");
+			
+			$("#welcome").html("<h1>Welcome to WeCare!</h1>");
+			$("#nextimage").html('<img src="https://www.brandcrowd.com/gallery/brands/pictures/picture15611992633036.jpg" alt="Avatar"  width="300" height="200">');
+			$("#username").html('<p class="botText" style="text-align:center;"><span>Hi ' + rawText + ' , I am your personal Banker!</span></p>');
+			
+			$("#chatweb").load("chatbox");
+			});
+		}
+$(document).ready(function(){
+  
+  $("#buttonInput").click(function(){
+    chatsetup()
+  });
+  
+});
+</script>
+
+
+
+</body>
+</html>
